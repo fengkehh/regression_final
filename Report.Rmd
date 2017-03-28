@@ -49,9 +49,9 @@ Figure \@ref(fig:non-categorical-panel) shows how various non-categorical predic
 # Regression Analysis
 
 ## Model Selection
-Since amf is a two-level factor coded with 0 and 1, it can be directly used as a predictor in MLR. Nested MLR fits are generated with increasing model complexities using the following code:
+Since amf is a two-level factor coded with 0 and 1, it can be directly used as a predictor in MLR. Nested MLR fits are generated with increasing model complexities. ANOVA-F test is then carried out (see appendix). 
 
-```{r nested_fit, echo = TRUE}
+```{r nested_fit}
 fit0 <- lm(mpg ~ amf, data = mtcars)
 
 fit1 <- update(fit0, mpg ~ amf + wtc)
@@ -63,12 +63,6 @@ fit3 <- update(fit2, mpg ~ amf + wtc + hpc + dratc)
 fit4 <- update(fit3, mpg ~ amf + wtc + hpc + dratc + qsec)
 
 fit5 <- update(fit4, mpg ~ amf + wtc + hpc + dratc + qsec + disp)
-```
-
-ANOVA-F test is then carried out.
-
-```{r anova}
-anova(fit0, fit1, fit2, fit3, fit4, fit5)
 ```
 
 F-test P values suggest that the inclusion of weight and horsepower is justified while the rest are not. Transmission type, weight and horsepower are therefore selected to be the relevant predictors (ie: fit2). The residual plot is shown in Figure \@ref(fig:residual). 
@@ -99,6 +93,26 @@ Using MLR analysis a model is constructed to reflect the association of fuel eff
 
 # Appendix
 
+## Anova Test For Model Selection
+```{r nested_fit_code, echo = TRUE, eval = FALSE}
+fit0 <- lm(mpg ~ amf, data = mtcars)
+
+fit1 <- update(fit0, mpg ~ amf + wtc)
+
+fit2 <- update(fit1, mpg ~ amf + wtc + hpc)
+
+fit3 <- update(fit2, mpg ~ amf + wtc + hpc + dratc)
+
+fit4 <- update(fit3, mpg ~ amf + wtc + hpc + dratc + qsec)
+
+fit5 <- update(fit4, mpg ~ amf + wtc + hpc + dratc + qsec + disp)
+```
+
+```{r anova}
+anova(fit0, fit1, fit2, fit3, fit4, fit5)
+```
+
+## Figures
 ```{r categorical-panel, fig.cap = 'Potential Categorical Predictors Grouped by Transmission Type', fig.height = 13}
 # This plot makes use of the multiplot function: http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
 
