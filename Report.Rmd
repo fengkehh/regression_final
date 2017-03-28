@@ -3,7 +3,7 @@ title: "Effect of Transmission on Fuel Efficiency"
 author: "Keh-Harng Feng"
 date: "March 27, 2017"
 output: 
-    bookdown::pdf_document2: 
+    bookdown::pdf_book:
         fig_caption: TRUE
         toc: FALSE
 ---
@@ -24,11 +24,11 @@ The torque and speed output of an internal combustion engine is controlled using
 
 # Data Description & Manipulation
 
-Motor vehicle road test performance is obtained from the mtcars dataset. The origin of the data and a list of variables contained can be found on its [R documentation page](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html). The outcome variable of primary interest is mpg which measures fuel efficiency. The predictor of interest is am, which categorizes transmission type. However other variables may or may not have an effect on fuel efficiency as well. To allow logical interpretations during regression analysis, the following variables are identified as potential non-categorical predictors. They are then centered, normalized and renamed:
+Motor vehicle road test performance is obtained from the mtcars dataset. The origin of the data and a list of variables contained can be found on its [R documentation page](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html). The outcome variable of primary interest is `mpg` which measures fuel efficiency. The predictor of interest is `am`, which categorizes transmission type. However other variables may or may not have an effect on fuel efficiency as well. To allow logical interpretations during regression analysis, the following variables are identified as potential non-categorical predictors. They are then centered and renamed:
 
-- hpc <- normalized centered hp
-- wtc <- normalized centered weight
-- dratc <- normalized centered rear axle ratio
+- hpc <- centered hp
+- wtc <- centered weight
+- dratc <- centered rear axle ratio
 
 The am variable is also transformed into a factor variable amf with the proper labels 'auto' and 'manual'.
 
@@ -89,7 +89,7 @@ Notice that although the intention is to study the effect of transmission type o
 
 # Conclusion
 
-Using MLR analysis a model is constructed to reflect the association of fuel efficiency, mpg with transmission type, horsepower and weight. Residual analysis shows that the model is a good fit. However, T-test on the model coefficients reveal that the null hypothesis for the transmission type coefficient cannot be rejected. The evidence therefore suggests that the type of transmission **does not** have significant effect on fuel efficiency. Weight and horsepower seem to have much more significance in this regard.
+Using MLR analysis a model is constructed to reflect the association of fuel efficiency, mpg with transmission type, horsepower and weight. Residual analysis shows that the model is a good fit. However, T-test on the model coefficients reveals that the null hypothesis for the transmission type coefficient cannot be rejected. The evidence therefore suggests that the type of transmission **does not** have significant effect on fuel efficiency. Weight and horsepower seem to have much more significance in this regard.
 
 # Appendix
 
